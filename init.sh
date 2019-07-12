@@ -4,20 +4,27 @@ set -e
 
 path=`dirname $0`
 
-kubernetes_version=1.13.4
-harbor_version=1.7.3
-docker_version=18.06.3
-haproxy_version=1.8.14
+kubernetes_version=1.15.0
+harbor_version=1.8.1
+docker_version=18.09.6
+haproxy_version=2.0.0
 keepalived_version=1.3.5
 loadbalancer_version=HAProxy-${haproxy_version}_Keepalived-${keepalived_version}
-prometheus_version=2.7.1
-prometheus_operator_version=0.29.0
+prometheus_version=2.7.2
+prometheus_operator_version=0.30.0
+kube_prometheus_version=0.1.0
+metrics_server_version=0.3.3
+dashboard_version=1.10.1
+flannel_version=0.11.0
+helm_version=2.14.1
+istio_version=1.2.0
 
 mv ${path}/kubernetes-playbook/version ${path}/kubernetes-playbook/v${kubernetes_version}
 mv ${path}/harbor-playbook/version ${path}/harbor-playbook/v${harbor_version}
 mv ${path}/docker-playbook/version ${path}/docker-playbook/${docker_version}-CE
 mv ${path}/loadbalancer-playbook/version ${path}/loadbalancer-playbook/${loadbalancer_version}
 mv ${path}/prometheus-playbook/version ${path}/prometheus-playbook/v${prometheus_version}
+mv ${path}/istio-playbook/version ${path}/istio-playbook/v${istio_version}
 
 docker run --rm --name=kubeadm-version wise2c/kubeadm-version:v${kubernetes_version} kubeadm config images list --kubernetes-version ${kubernetes_version} > ${path}/k8s-images-list.txt
 
@@ -31,6 +38,12 @@ echo "HAProxy Version: ${haproxy_version}" >> ${path}/components-version.txt
 echo "Keepalived Version: ${keepalived_version}" >> ${path}/components-version.txt
 echo "Prometheus Version: ${prometheus_version}" >> ${path}/components-version.txt
 echo "PrometheusOperator Version: ${prometheus_operator_version}" >> ${path}/components-version.txt
+echo "KubePrometheus Version: ${kube_prometheus_version}" >> ${path}/components-version.txt
+echo "MetricsServer Version: ${metrics_server_version}" >> ${path}/components-version.txt
+echo "Dashboard Version: ${dashboard_version}" >> ${path}/components-version.txt
+echo "Flannel Version: ${flannel_version}" >> ${path}/components-version.txt
+echo "Helm Version: ${helm_version}" >> ${path}/components-version.txt
+echo "Istio Version: ${istio_version}" >> ${path}/components-version.txt
 
 for dir in `ls ${path}`
 do

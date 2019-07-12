@@ -2,7 +2,7 @@
     {
         "variable": "self",
         "label": "harbor hosts",
-        "description": "hosts for setup harbor",
+        "description": "hosts to be set up as harbor server",
         "type": "host",
         "default": "",
         "required": true
@@ -18,8 +18,8 @@
     {
         "variable": "password",
         "label": "harbor admin password",
-        "description": "everyone can 'docker login' use this",
-        "type": "string",
+        "description": "Password for the Harbor admin account",
+        "type": "password",
         "default": "Harbor12345",
         "required": true
     }
